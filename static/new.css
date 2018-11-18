@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    height: 100%;
+    font-size: 14px;
+    line-height: 160%;
+    color: #666;
+    background: url(bg.gif) repeat;
+        font-family: 'Helvetica Neue',STHeiti,'Microsoft YaHei',Helvetica,Arial,sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    font-size: 100%;
+    line-height: 1.7;
+}
+a:hover{
+    text-decoration:none;
+}
+.container-wrap {
+    margin-top: 60px;
+}
+.content-wrap{
+    margin: 0 15px;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+}
+.main-content{
+    padding: 0 0 20px;
+    border-right: 1px solid #e6e6e6;
+}
+.tabs-links{
+    position: relative;
+    z-index: 1;
+    min-height: 63px;
+    margin: 0;
+    border-color: #e6e6e6;
+    padding: 30px 20px 0;
+}
+.tabs-links li {
+    float: right;
+    margin: 0 4px 0 0;
+    font-size: 14px
+}
+.tabs-links h2 {
+    position: absolute;
+    left: 20px;
+    top:16px;
+    margin: 0;
+    font-size: 20px;
+    color: #333333;
+    line-height:1.7;
+}
+.mod-list{
+    overflow: hidden;
+    width: 100%;
+    height:auto;
+}
+.mod-list>div+div {
+    border-top: 1px solid #F5F5F5;
+}
+.mod-list .mod-item{
+    position: relative;
+    z-index: 0;
+    min-height: 45px;
+    padding: 14px 0 14px 50px;
+}
+.mod-list .mod-item >.user-img {
+    position: absolute;
+    left: 0;
+    top:18px;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 400;
+}
+.mod-list .mod-item >.user-img img {
+    width: 40px;
+    height: 40px;
+}
+.mod-list .question-content h4 {
+    margin: 0 0 3px 0;
+    padding-right: 20px;
+    font-size: 14px;
+    word-wrap: break-word;
+
+}
+.mod-list .question-content p {
+    margin: 0;
+    color:#999999;
+}
+.mod-list .question-content p span {
+    font-size: 12px;
+    font-weight: 400;
+    color: #999;
+}
+.mod-list .question-content user-name{
+    color: #666666 !important;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+
+.side-content{
+    border-left: 1px solid #e6e6e6;
+    margin-left: -1px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.aw-back-top {
+    position: fixed;
+    display: inline;
+    padding: 0 5px;
+    right: 20px;
+    bottom: 20px;
+    background-color: #d9d9d9;
+    border-radius: 3px;
+}
+.aw-back-top:hover {
+    background-color: #d0d0d0;
+}
+.aw-back-top .icon-link {
+    display: block;
+    padding: 10px;
+    color: #a6a6a6;
+    font-size: 20px;
+}
