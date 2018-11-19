@@ -125,3 +125,57 @@ a:hover{
     color: #a6a6a6;
     font-size: 20px;
 }
+
+
+/*detail page*/
+.question-detail {
+    margin-bottom: 30px;
+    padding: 10px 20px 0;
+}
+.question-detail>.mod-head {
+    position: relative;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f5f5f5;
+}
+.question-detail .mod-head h1 {
+    max-width: 500px;
+    margin: 0;
+    font-size: 20px;
+    line-height: 30px;
+    color:#333333;
+}
+.question-detail .content {
+    padding: 10px 0;
+    position: relative;
+    z-index: 1;
+    line-height: 180%;
+    word-wrap: break-word!important;
+}
+.question-detail .meta {
+    min-height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+}
+.mod-head{
+    border-bottom: 1px solid #e6e6e6 ;
+}
+.mod-head h2{
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    margin: 0;
+    font-size: 20px;
+    color:#333333;
+}
+.aw-feed-list .aw-item {
+    position: relative;
+    padding: 14px 0;
+    border-bottom: 1px solid #F5F5F5
+}
+.user-img {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 40px;
+    height: 40px;
+}

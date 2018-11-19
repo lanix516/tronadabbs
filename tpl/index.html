@@ -66,18 +66,16 @@
                                 <div class="mod-item">
                                     <a class="user-img"
                                        href="#" rel="follow"><img
-                                            src="./static/avatar-max-img.png"
+                                            src="/static/avatar-max-img.png"
                                             alt="">
                                     </a>
                                     <div class="question-content">
                                         <h4>
-                                            <a href="http://wenda.bootcss.com/question/2458">{{topic.title}}</a>
+                                            <a href="detail/{{topic.id}}">{{topic.title}}</a>
                                         </h4>
-                                        <a href="http://wenda.bootcss.com/question/2458#!answer_form"
+                                        <a href="detail/2458#!answer_form"
                                            class="float-right text-secondary">回复</a>
-
                                         <p>
-
                                             <a href="#" class="user-name">{{topic.user.name}}</a>
                                             <span class="text-secondary">发起了问题 • 1 人关注 • 0 个回复 • 84 次浏览 • 2018-11-06 00:26
 				                            </span>
@@ -105,12 +103,10 @@
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item active"><i class="icon icon-heart mr-3"></i>热门话题</li>
                       <li class="list-group-item">
-                          <h5>Dapibus ac facilisis in</h5>
+                          <h5>热门话题11</h5>
                           <small class="text-muted float-right">3 days ago</small>
                       </li>
-                      <li class="list-group-item">Morbi leo risus</li>
-                      <li class="list-group-item">Porta ac consectetur ac</li>
-                      <li class="list-group-item">Vestibulum at eros</li>
+
                     </ul>
                 </div>
 
@@ -121,7 +117,7 @@
 
 
 
-<a class="aw-back-top d-xs-none" href="javascript:;" onclick="$.scrollTo(1, 600, {queue:true});"><i
+<a class="aw-back-top d-xs-none" href="javascript:;" onclick="$('html,body').animate({scrollTop:0},'slow');"><i
         class="icon icon-link"></i></a>
 
 
