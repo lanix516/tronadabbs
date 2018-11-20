@@ -40,7 +40,7 @@ class LoginHandler(BaseHandler):
 
 class IndexHandler(BaseHandler):
     def get(self, *args, **kwargs):
-        topics = self.session.query(Topic).all()
+        topics = self.session.query(Topic).offset(0).limit(10).all()
         self.render("index.html", topics=topics)
 
 
@@ -48,6 +48,23 @@ class DetailHandler(BaseHandler):
     def get(self, id):
         topic = self.session.query(Topic).filter(Topic.id==id).one()
         self.render("detail.html", topic=topic)
+
+
+class PostTopicHandler(BaseHandler):
+    def get(self):
+        if not self.is_auth:
+            self.redirect("/login")
+        self.render("post.html")
+
+    def post(self):
+        title = self.get_argument("title")
+        content = self.get_argument("content")
+        uid = int(self.get_current_user())
+        print(self.get_current_user())
+        topic = Topic(title=title, content=content, user_id=uid)
+        self.session.add(topic)
+        self.session.commit()
+        self.redirect("/")
 
 
 class ReplyHandler(BaseHandler):
@@ -76,6 +93,7 @@ def make_app():
     return tornado.web.Application([
         (r"/", IndexHandler),
         (r"/detail/(\d+)", DetailHandler),
+        (r"/post", PostTopicHandler),
         (r"/reply", ReplyHandler),
         (r"/login", LoginHandler)
     ], **settings)

@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
     <meta name="renderer" content="webkit"/>
-    <title>网</title>
+    <title>添加</title>
     <meta name="keywords" content="bootstrap,html,css,javascript"/>
     <meta name="description" content=""/>
     <link href="" rel="shortcut icon" type="image/x-icon"/>
@@ -16,7 +16,7 @@
 
 
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <noscript unselectable="on" id="noscript">
     <div class="aw-404 aw-404-wrap container">
@@ -41,7 +41,7 @@
                     <a class="nav-link" href="#">Link</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link disabled" href="#">{{current_user}}</a>
                 </li>
             </ul>
             <form class="form-inline mt-2 mt-md-0">
@@ -56,72 +56,64 @@
         <div class="container">
             <div class="row content-wrap">
                 <div class="col-md-9 col-sm-12 main-content">
-                    <ul class="nav nav-tabs tabs-links">
-                        <h2 class="d-xs-none"><i class="icon icon-list2"></i> 发现</h2>
-                    </ul>
                     <div class="p-3">
                         <div class="mod-body">
                             <div class="mod-list">
-                                {% for topic in topics %}
-                                <div class="mod-item">
-                                    <a class="user-img"
-                                       href="#" rel="follow"><img
-                                            src="/static/avatar-max-img.png"
-                                            alt="">
-                                    </a>
-                                    <div class="question-content">
-                                        <h4>
-                                            <a href="detail/{{topic.id}}">{{topic.title}}</a>
-                                        </h4>
-                                        {%if current_user%}
-                                        <a href="detail/{{topic.id}}#!answer_form"
-                                           class="float-right text-secondary">回复</a>
-                                        {%end%}
-
-                                        <p>
-                                            <a href="#" class="user-name">{{topic.user.name}}</a>
-                                            <span class="text-secondary">发起了问题 • 1 人关注 • 0 个回复 • 84 次浏览 • 2018-11-06 00:26
-				                            </span>
-                                            <span class="text-secondary related-topic hide"></span>
-                                        </p>
-
+                                <form action="" method="post" onsubmit="return checkSome()">
+                                    <div class="form-group">
+                                        <label for="title">标题</label>
+                                        <input type="text" class="form-control" id="title" name="title"
+                                               placeholder="标题">
                                     </div>
-                                </div>
-                                {% end %}
+                                    <div class="form-group mt-2">
+                                        <label for="content_area">内容</label>
+                                        <div class="mt-1" id="content_area" ></div>
+                                        <textarea id="content" name="content" style="display: none"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                          <button type="submit" class="btn btn-primary mb-2 mr-1 float-right">提交</button>
+                                    </div>
+                                </form>
                             </div>
-                            <nav aria-label="Page navigation" class="float-right mt-3">
-                              <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                              </ul>
-                            </nav>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12 side-content d-xs-none">
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item active"><i class="icon icon-heart mr-3"></i>热门话题</li>
-                      <li class="list-group-item">
-                          <h5>热门话题11</h5>
-                          <small class="text-muted float-right">3 days ago</small>
-                      </li>
 
                     </ul>
                 </div>
-
             </div>
         </div>
     </div>
 </main>
 
 
-
 <a class="aw-back-top d-xs-none" href="javascript:;" onclick="$('html,body').animate({scrollTop:0},'slow');"><i
         class="icon icon-link"></i></a>
+<script src="/static/editor/wangEditor.min.js"></script>
+<script type="text/javascript">
 
+    let E = window.wangEditor
+    let editor = new E('#content_area')
+    var content = $('#content')
+    editor.customConfig.onchange = function (html) {
+        content.val(html)
+    }
+    editor.create()
+
+    function checkSome(){
+        if(!$("#title").val()){
+            alert("输入标题")
+            return false
+
+        }
+        if(!$("#content").val()){
+            alert("输入内容!")
+            return false
+        }
+    }
+
+</script>
 </body>
 </html>

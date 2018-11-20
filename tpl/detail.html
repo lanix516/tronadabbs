@@ -41,7 +41,7 @@
                     <a class="nav-link" href="#">Link</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link disabled" href="#">{{current_user}}</a>
                 </li>
             </ul>
             <form class="form-inline mt-2 mt-md-0">
@@ -99,14 +99,15 @@
                                         </div>
                                     </div>
                                     {%end%}
-                                    <div class="answer-wrap mt-2">
+                                    {%if current_user%}
+                                        <div class="answer-wrap mt-2" id="answer_form">
                                         <h4 class="mt-3 border-bottom"> 我有话说</h4>
                                         <div id="answer" >
 
                                         </div>
                                         <button type="button" class="btn btn-primary float-right mt-2" onclick="postReply()">回复</button>
                                     </div>
-
+                                    {% end %}
                                 </div>
                             </div>
                         </div>
@@ -136,11 +137,15 @@
 
 <a class="aw-back-top d-xs-none" href="javascript:;" onclick="$('html,body').animate({scrollTop:0},'slow');"><i
         class="icon icon-link"></i></a>
-<script src="/static/wangEditor.min.js"></script>
+<script src="/static/editor/wangEditor.min.js"></script>
 <script>
+
 var E = window.wangEditor
 var editor2 = new E('#answer')
-editor2.create()
+{%if current_user%}
+    editor2.create()
+{%end%}
+
 var tid = {{topic.id}}
 function postReply(){
     let vhtml = editor2.txt.html()
