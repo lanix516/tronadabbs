@@ -16,6 +16,7 @@ class BaseModel(object):
     update_date = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 
 
+
 Base = declarative_base(cls=BaseModel)
 engine = create_engine("sqlite:///bbs.db", echo=True)
 db_session = sessionmaker(bind=engine)

@@ -10,13 +10,11 @@
     <meta name="description" content=""/>
     <link href="" rel="shortcut icon" type="image/x-icon"/>
 
-    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/icomoon/style.css"/>
     <link rel="stylesheet" type="text/css" href="/static/new.css"/>
 
 
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="static/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <noscript unselectable="on" id="noscript">
     <div class="aw-404 aw-404-wrap container">
@@ -35,19 +33,13 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link disabled" href="/login">登陆</a>
                 </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+
         </div>
     </nav>
 </header>
@@ -58,11 +50,14 @@
                 <div class="col-md-9 col-sm-12 main-content">
                     <ul class="nav nav-tabs tabs-links">
                         <h2 class="d-xs-none"><i class="icon icon-list2"></i> 发现</h2>
+                        <a href="/post" class="btn btn-primary"
+                           style="position: absolute;right:20px;top:16px"
+                        >发帖</a>
                     </ul>
                     <div class="p-3">
                         <div class="mod-body">
                             <div class="mod-list">
-                                {% for topic in topics %}
+                                {% for topic in data["topics"] %}
                                 <div class="mod-item">
                                     <a class="user-img"
                                        href="#" rel="follow"><img
@@ -80,7 +75,7 @@
 
                                         <p>
                                             <a href="#" class="user-name">{{topic.user.name}}</a>
-                                            <span class="text-secondary">发起了问题 • 1 人关注 • 0 个回复 • 84 次浏览 • 2018-11-06 00:26
+                                            <span class="text-secondary">发起了问题  • {{len(topic.comments)}} 个回复 • 84 次浏览 • 2018-11-06 00:26
 				                            </span>
                                             <span class="text-secondary related-topic hide"></span>
                                         </p>
@@ -90,26 +85,23 @@
                                 {% end %}
                             </div>
                             <nav aria-label="Page navigation" class="float-right mt-3">
-                              <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                              </ul>
+                                <ul class="pagination">
+                                {% for p in data["count"] %}
+                                    {% if p == data["page"] %}
+                                        <li class="page-item active"><a class="page-link" href="/?page={{p}}">{{p+1}}</a></li>
+                                     {%else%}
+                                        <li class="page-item"><a class="page-link" href="/?page={{p}}">{{p+1}}</a></li>
+                                    {% end %}
+                                {% end %}
+                                </ul>
                             </nav>
                         </div>
 
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12 side-content d-xs-none">
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item active"><i class="icon icon-heart mr-3"></i>热门话题</li>
-                      <li class="list-group-item">
-                          <h5>热门话题11</h5>
-                          <small class="text-muted float-right">3 days ago</small>
-                      </li>
-
+                    <ul class="list-group list-group-flush" id="hotMessage">
+                        <li class="list-group-item active"><i class="icon icon-heart mr-3"></i>最新话题</li>
                     </ul>
                 </div>
 
@@ -118,10 +110,38 @@
     </div>
 </main>
 
-
-
 <a class="aw-back-top d-xs-none" href="javascript:;" onclick="$('html,body').animate({scrollTop:0},'slow');"><i
         class="icon icon-link"></i></a>
 
+
+<script src="static/jquery.min.js"></script>
+<script src="static/bootstrap/js/bootstrap.min.js"></script>
+<script src="static/template-web.js"></script>
+<script id="news-template" type="text/html">
+        <li class="list-group-item active">
+            <h1 style="font-size: 24px"><i class="icon icon-heart mr-3"></i>最新话题</h1>
+        </li>
+        <% for(var i=0;i<target.length;i++){ %>
+            <li class="list-group-item">
+                <h5 class="w-100" style="overflow: hidden">
+                    <a href="/detail/<%= target[i].id  %>">
+                        <%= target[i].title  %>
+                    </a>
+                </h5>
+                <small class="text-muted float-right"><%= target[i].create_date  %></small>
+            </li>
+        <% } %>
+
+</script>
+<script>
+    $.get("/newTopic", function(res){
+        let _res = JSON.parse(res)
+        if(_res.state == 1){
+           let html = template("news-template", {target:_res.news});
+            document.getElementById('hotMessage').innerHTML = html;
+        }
+    })
+
+</script>
 </body>
 </html>

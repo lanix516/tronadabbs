@@ -10,7 +10,7 @@
     <meta name="description" content=""/>
     <link href="" rel="shortcut icon" type="image/x-icon"/>
 
-    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/icomoon/style.css"/>
     <link rel="stylesheet" type="text/css" href="/static/new.css"/>
 
@@ -35,13 +35,13 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="/">Link</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">{{current_user}}</a>
+                    <a class="nav-link disabled" href="/">{{current_user}}</a>
                 </li>
             </ul>
             <form class="form-inline mt-2 mt-md-0">
@@ -60,6 +60,7 @@
                         <div class="mod-body">
                             <div class="mod-list">
                                 <form action="" method="post" onsubmit="return checkSome()">
+                                    {% module xsrf_form_html() %}
                                     <div class="form-group">
                                         <label for="title">标题</label>
                                         <input type="text" class="form-control" id="title" name="title"

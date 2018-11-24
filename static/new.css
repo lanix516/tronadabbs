@@ -167,6 +167,13 @@ a:hover{
     font-size: 20px;
     color:#333333;
 }
+.mod-head a{
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    margin: 0;
+    font-size: 20px;
+}
 .aw-feed-list .aw-item {
     position: relative;
     padding: 14px 0;
